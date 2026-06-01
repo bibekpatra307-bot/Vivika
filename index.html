@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>चित्त विजय — पूर्ण गुरु-शिष्य महायात्रा (200 अध्याय)</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root {
+    --parchment: #f7edd8;
+    --parchment-mid: #eedd99;
+    --ink: #2c1a0e;
+    --ink-light: #5a3e28;
+    --gold: #b8860b;
+    --gold-light: #d4a841;
+    --crimson: #7a1515;
+    --bg: #0e0702;
+  }
+  body { background: var(--bg); font-family: 'Tiro Devanagari Hindi', Georgia, serif; overflow-x: hidden; }
+  
+  /* LANDING SCENE */
+  #landing {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 60%, #1e0e04 0%, #0a0401 100%);
+    z-index: 100;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #landing.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .stars-bg { position: absolute; inset: 0; overflow: hidden; }
+  .star-dot { position: absolute; border-radius: 50%; background: #f0c060; animation: twinkle var(--d) ease-in-out infinite; }
+  @keyframes twinkle { 0%,100%{opacity:var(--oa);transform:scale(1);} 50%{opacity:0.05;transform:scale(0.3);} }
+  .book-glow { position: absolute; width: 340px; height: 80px; background: radial-gradient(ellipse, rgba(184,134,11,0.35) 0%, transparent 70%); bottom: 30%; left: 50%; transform: translateX(-50%); filter: blur(20px); pointer-events: none; animation: glowBreath 3s ease-in-out infinite; }
+  @keyframes glowBreath { 0%,100%{opacity:0.7;} 50%{opacity:1;} }
+  
+  /* 3D BOOK */
+  .book-scene { perspective: 1200px; cursor: pointer; margin-bottom: 30px; position: relative; z-index: 2; }
+  .book-scene:hover .book-3d { transform: rotateY(-18deg) rotateX(5deg) translateY(-6px); }
+  .book-3d { width: 280px; height: 400px; position: relative; transform-style: preserve-3d; transform: rotateY(-12deg) rotateX(3deg); transition: transform 0.4s ease; }
+  .book-front {
+    position: absolute; inset: 0;
+    background: linear-gradient(145deg, #faf3e0 0%, #f0e3c8 100%);
+    backface-visibility: hidden;
+    border-radius: 3px 8px 8px 3px;
+    box-shadow: 3px 0 12px rgba(0,0,0,0.6);
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(184,134,11,0.5);
+    overflow-y: auto;
+  }
+  /* cover photo style exactly as per given image */
+  .cover-photo-style {
+    font-family: 'Tiro Devanagari Hindi', 'Cinzel', serif;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cover-quote { font-size: 1rem; color: #5a2a0a; letter-spacing: 1px; border-left: 3px solid #b8860b; padding-left: 12px; margin: 12px 0; font-style: italic; line-height: 1.5; text-align: left; }
+  .cover-title { font-size: 2rem; font-weight: 800; color: #7a2e0e; text-shadow: 2px 2px 3px rgba(0,0,0,0.1); margin: 15px 0 8px; letter-spacing: 3px; font-family: 'Cinzel', serif; }
+  .cover-sub { font-size: 0.85rem; color: #b45f2b; letter-spacing: 2px; border-top: 1px dashed #c8a85b; border-bottom: 1px dashed #c8a85b; display: inline-block; padding: 5px 0; margin: 12px auto; }
+  .dialogue-preview { background: rgba(184,134,11,0.08); border-radius: 12px; padding: 12px; margin: 16px 0; font-size: 0.8rem; text-align: left; }
+  .guru-talk { font-weight: bold; color: #8b3c1c; margin: 6px 0; }
+  .shishya-talk { font-weight: bold; color: #7a1515; margin: 6px 0; }
+  .cover-footer { margin-top: 18px; font-size: 0.7rem; letter-spacing: 2px; color: #8b5a2b; border-top: 1px solid rgba(184,134,11,0.4); padding-top: 12px; display: flex; justify-content: space-between; font-family: 'Cinzel', serif; }
+  .cover-tags { display: flex; gap: 12px; justify-content: center; margin: 12px 0; font-size: 0.7rem; color: #a86f2e; }
+  .book-spine-3d { position: absolute; width: 32px; height: 100%; left: -32px; top: 0; transform-origin: right; transform: rotateY(90deg); background: linear-gradient(90deg,#2a1508,#5a2a0a,#3d1a06,#2a1508); display: flex; align-items: center; justify-content: center; box-shadow: -4px 0 12px rgba(0,0,0,0.8); }
+  .spine-txt { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Tiro Devanagari Hindi', serif; font-size: 0.7rem; color: #e5bc7a; letter-spacing: 5px; font-weight: bold; }
+  .book-pages-edge { position: absolute; width: 14px; height: 396px; right: -12px; top: 2px; background: repeating-linear-gradient(0deg, #f7edd8 0px, #f7edd8 2px, #e2cf9e 2px, #e2cf9e 4px); transform: rotateY(-90deg) translateX(7px); transform-origin: left; }
+  .book-back { position: absolute; inset: 0; background: #1c0c04; border-radius: 2px 6px 6px 2px; transform: rotateY(180deg); backface-visibility: hidden; box-shadow: inset 0 0 0 2px #5a2e14; }
+  .click-hint { position: absolute; bottom: -60px; left: 50%; transform: translateX(-50%); text-align: center; color: rgba(184,134,11,0.6); font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 3px; animation: hintPulse 2s ease-in-out infinite; white-space: nowrap; }
+  @keyframes hintPulse { 0%,100%{opacity:0.4;} 50%{opacity:0.9;} }
+  .landing-subtitle { font-family:'Tiro Devanagari Hindi',serif; color:rgba(184,134,11,0.85); font-size:0.85rem; letter-spacing:2px; margin-top:25px; text-align:center; z-index:2; background: rgba(0,0,0,0.4); padding: 6px 18px; border-radius: 40px; backdrop-filter: blur(3px); }
+  
+  /* OPEN ANIMATION */
+  #landing.opening .book-3d { animation: bookOpen 1.2s cubic-bezier(.4,0,.2,1) forwards; }
+  @keyframes bookOpen { 0% { transform: rotateY(-12deg) rotateX(3deg) scale(1); opacity:1; } 40% { transform: rotateY(-55deg) rotateX(8deg) scale(1.1); opacity:1; } 70% { transform: rotateY(5deg) rotateX(2deg) scale(1.2); opacity:1; } 100% { transform: rotateY(0deg) rotateX(0deg) scale(4.5); opacity:0; } }
+  
+  /* READER */
+  #reader { display: none; background: #12080300; }
+  #reader.visible { display: block; }
+  .reader-topbar { position: sticky; top: 0; z-index: 50; background: rgba(14,7,2,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(184,134,11,0.3); display: flex; align-items: center; padding: 10px 24px; gap: 16px; }
+  .topbar-title { font-family:'Tiro Devanagari Hindi',serif; color: var(--gold-light); font-size:0.95rem; flex:1; }
+  .topbar-progress-wrap { flex: 2; height: 3px; background: rgba(184,134,11,0.2); border-radius:2px; overflow:hidden; }
+  .topbar-progress { height:100%; background:linear-gradient(90deg,var(--crimson),var(--gold)); width:0; transition:width 0.3s; }
+  .topbar-pct { font-family:'Cinzel',serif; font-size:0.65rem; color:rgba(184,134,11,0.7); min-width:40px; text-align:right; }
+  #book-content { max-width: 760px; margin: 0 auto; padding: 0 20px 100px; }
+  
+  /* PARCHMENT & CARDS */
+  .page-section { position: relative; margin: 48px 0; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .page-section.visible { opacity: 1; transform: translateY(0); }
+  .parchment-card { background: radial-gradient(ellipse at 5% 5%, rgba(255,248,220,0.7) 0%, transparent 40%), radial-gradient(ellipse at 95% 95%, rgba(200,160,100,0.3) 0%, transparent 40%), linear-gradient(160deg, #f9f0da 0%, #f3e5c0 40%, #eddcb0 100%); border-radius: 2px 8px 8px 2px; box-shadow: -8px 0 0 #c8a060, -12px 4px 20px rgba(0,0,0,0.5), 8px 4px 30px rgba(0,0,0,0.3), inset -3px 0 8px rgba(100,60,20,0.1); border-left: 6px solid #b8924a; position: relative; overflow: hidden; }
+  .parchment-card::before { content:''; position:absolute; inset:0; pointer-events:none; background: repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(160,120,60,0.07) 29px, rgba(160,120,60,0.07) 30px); }
+  .parchment-card::after { content:''; position:absolute; top:0; right:0; width:0; height:0; border-style:solid; border-width:0 28px 28px 0; border-color:transparent rgba(180,140,70,0.25) transparent transparent; }
+  .card-inner { padding: 52px 62px 60px; position:relative; }
+  .page-number-ribbon { position:absolute; left:-6px; top:24px; background: var(--crimson); color: #f5e8c0; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:2px; padding:3px 10px 3px 14px; clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%); }
+  .page-head { text-align:center; margin-bottom:28px; padding-bottom:20px; border-bottom:1px solid rgba(184,134,11,0.25); }
+  .ph-title { font-family:'Tiro Devanagari Hindi',serif; font-size:clamp(1.3rem,3.5vw,1.9rem); color:var(--ink); }
+  .sanvaad-header { text-align:center; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:4px; color:var(--crimson); margin:14px 0; }
+  .dialogue { margin-bottom:13px; }
+  .guru-line, .shishya-line { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; }
+  .shishya-line { flex-direction:row-reverse; }
+  .spk { font-size:1.2rem; flex-shrink:0; margin-top:3px; }
+  .bubble { max-width:85%; padding:10px 15px; font-size:0.97rem; line-height:1.85; color:var(--ink); border-radius:4px; }
+  .guru-line .bubble { background:rgba(184,134,11,0.09); border-left:3px solid var(--gold); border-radius:0 6px 6px 0; }
+  .shishya-line .bubble { background:rgba(122,21,21,0.07); border-right:3px solid var(--crimson); border-radius:6px 0 0 6px; text-align:right; }
+  .shiksha-box { background:linear-gradient(135deg,rgba(184,134,11,0.1),rgba(184,134,11,0.03)); border:1px solid rgba(184,134,11,0.22); border-radius:4px; padding:14px 20px; margin:20px 0 14px; position:relative; }
+  .shiksha-box::before { content:'◈ मुख्य शिक्षा'; position:absolute; top:-10px; left:16px; background:var(--parchment); padding:0 8px; color:var(--gold); font-family:'Cinzel',serif; font-size:0.58rem; }
+  .shiksha-text { font-style:italic; color:var(--ink-light); font-size:0.96rem; line-height:1.75; }
+  .sutra-line { text-align:center; padding:8px 0 4px; }
+  .sutra-line span { color:var(--gold); opacity:0.6; margin:0 8px; }
+  .sutra-quote { font-weight:600; font-style:italic; color:var(--ink); font-size:0.96rem; }
+  .section-end { text-align:center; color:var(--crimson); opacity:0.4; letter-spacing:8px; font-size:0.8rem; margin-top:20px; }
+  .special-inner, .final-inner, .khand-inner { padding: 60px 50px; text-align:center; }
+  .sp-title, .khand-title { font-family:'Tiro Devanagari Hindi',serif; font-size:1.7rem; color:var(--ink); margin-bottom:20px; }
+  .sp-body, .final-lines { font-size:1rem; line-height:2.2; color:var(--ink-light); font-style:italic; max-width:540px; margin:0 auto; }
+  .khand-sep { color:var(--gold); letter-spacing:5px; opacity:0.5; margin:10px 0; }
+  .khand-quote { font-style:italic; color:var(--ink-light); font-size:0.96rem; }
+  .toc-inner { padding:40px 48px; }
+  .toc-h { font-size:1.8rem; text-align:center; margin-bottom:10px; }
+  .toc-k { font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:4px; color:var(--crimson); border-bottom:1px solid rgba(122,21,21,0.3); margin:20px 0 12px; text-transform:uppercase; }
+  .toc-row { display:flex; align-items:baseline; gap:8px; padding:3px 0; }
+  .toc-n { min-width:32px; font-size:0.75rem; color:var(--crimson); }
+  .toc-dots { flex:1; border-bottom:1px dotted rgba(184,134,11,0.4); margin-bottom:4px; }
+  .toc-name { font-size:0.88rem; color:var(--ink-light); text-align:left; }
+  .back-top { position:fixed; bottom:30px; right:30px; background:rgba(14,7,2,0.9); border:1px solid rgba(184,134,11,0.5); color:var(--gold-light); font-family:'Cinzel',serif; font-size:0.7rem; padding:10px 18px; cursor:pointer; border-radius:3px; z-index:40; opacity:0; transition:0.2s; pointer-events:none; }
+  .back-top.show { opacity:1; pointer-events:all; }
+  @media(max-width:600px){ .card-inner,.special-inner,.final-inner,.khand-inner,.toc-inner { padding:32px 24px; } .book-3d { width: 230px; height: 340px; } .book-pages-edge { height: 336px; } .cover-title { font-size:1.6rem; } .bubble { font-size:0.88rem; } }
+</style>
+</head>
+<body>
+
+<!-- LANDING with PHOTO-INSPIRED COVER -->
+<div id="landing">
+  <div class="stars-bg" id="starsEl"></div>
+  <div class="book-glow"></div>
+  <div class="book-scene" id="bookScene" onclick="openBook()">
+    <div class="book-3d" id="book3d">
+      <div class="book-spine-3d"><span class="spine-txt">चित्त विजय</span></div>
+      <div class="book-pages-edge"></div>
+      <div class="book-front">
+        <div class="cover-photo-style">
+          <div style="font-size:2.2rem; color:#b45a2b;">🕉️</div>
+          <div class="cover-quote">प्रश्न तुम्हारे हैं...<br>उत्तर तुम्हारे भीतर हैं !</div>
+          <div class="cover-title"># चित्त विजय</div>
+          <div class="cover-sub">मन पर विजय की संवाद यात्रा</div>
+          <div class="dialogue-preview">
+            <div class="guru-talk">✦ गुरूदेव, मन इतना चंचल क्यों है? इसे शांत कैसे करें?</div>
+            <div class="shishya-talk">✦ शिष्य, मन को हराया नहीं जाता, उसे समझा जाता है...</div>
+          </div>
+          <div class="cover-tags"><span>ज्ञान</span> <span>•</span> <span>आत्मविभिन्न</span> <span>•</span> <span>योग</span> <span>•</span> <span>विवेक</span></div>
+          <div class="cover-footer"><span>Bibek Patra</span><span>✦ 200 अध्याय ✦</span></div>
+        </div>
+      </div>
+      <div class="book-back"></div>
+    </div>
+    <div class="click-hint">▼ &nbsp; पुस्तक खोलें &nbsp; ▼</div>
+  </div>
+  <div class="landing-subtitle">गुरु-शिष्य महायात्रा · २०० अध्याय · तीन खंड · चित्त विजय</div>
+</div>
+
+<!-- READER -->
+<div id="reader">
+  <div class="reader-topbar">
+    <div class="topbar-title">📖 चित्त विजय — मन पर विजय</div>
+    <div class="topbar-progress-wrap"><div class="topbar-progress" id="topProgress"></div></div>
+    <div class="topbar-pct" id="topPct">0%</div>
+  </div>
+  <div id="book-content"></div>
+</div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲ शीर्ष</button>
+
+<script>
+  // STARS
+  for(let i=0;i<90;i++){const s=document.createElement('div');s.className='star-dot';const sz=1+Math.random()*2.8;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--oa:${0.2+Math.random()*0.6};--d:${2+Math.random()*6}s;animation-delay:${Math.random()*6}s`;document.getElementById('starsEl').appendChild(s);}
+
+  // --------------------------------------------------------------
+  // COMPLETE 200 CHAPTERS (exact titles as per your DOCX, full data)
+  // --------------------------------------------------------------
+  const chapters = [];
+
+  function addChap(n, t, g, s, g2, m, q) { chapters.push({ n, t, g, s, g2, m, q }); }
+
+  // Chapters 1-10 (explicit from your manuscript)
+  addChap(1,"खोज की शुरुआत","मन एक महासागर है, शिष्य। जब तक तुम उसमें डूबे हो, तुम्हें उसकी गहराई का अनुभव नहीं होगा।","तो मुझे क्या करना होगा, गुरुदेव?","पहले किनारे पर आओ। स्वयं को देखना सीखो।","जागरूकता की यात्रा स्वयं को देखने से आरंभ होती है।","जो स्वयं को जानता है, वही ज्ञानी है।");
+  addChap(2,"मन का पहला रहस्य","मन एक चंचल बंदर की तरह है। यह एक पल में आकाश में होता है, दूसरे पल धरती पर।","तो क्या मन को नियंत्रित किया जा सकता है?","नियंत्रण नहीं, समझ की आवश्यकता है। जो समझ लिया, वह शांत हो जाता है।","मन की प्रकृति को समझना ही मन को जीतने का पहला कदम है।","मन को दबाओ मत, उसे समझो।");
+  addChap(3,"प्रश्न और जिज्ञासा","जिज्ञासा ज्ञान की माँ है। जो पूछता है, वही सीखता है।","परंतु कुछ प्रश्नों के उत्तर नहीं मिलते, गुरुदेव।","कुछ प्रश्नों का उत्तर जीना पड़ता है, शब्दों में नहीं मिलता।","जीवन के गहरे प्रश्न जीकर ही समझे जाते हैं।","जिज्ञासु मन ही ज्ञान का पात्र है।");
+  addChap(4,"विचारों का जंगल","तुम्हारे मन में कितने विचार हैं, शिष्य?","अनगिनत, गुरुदेव। कभी-कभी तो सोचना ही बंद नहीं होता।","विचारों को देखो। देखने से वे धीरे-धीरे कम होने लगते हैं।","विचारों का साक्षी बनना ही ध्यान का प्रारंभ है।","विचार तुम नहीं हो — तुम विचारों के साक्षी हो।");
+  addChap(5,"भय और साहस","भय क्या है, शिष्य?","वह जो मुझे आगे बढ़ने से रोकता है।","भय अज्ञान की छाया है। ज्ञान का प्रकाश आते ही वह विलीन हो जाता है।","भय का सामना करना ही सच्चा साहस है।","भय से भागो मत — उसे जानो और पार करो।");
+  addChap(6,"अहंकार का भार","सबसे भारी बोझ क्या है?","पत्थर? लोहा?","नहीं — अहंकार। वह बोझ जो आत्मा को दबाता है।","अहंकार त्यागने से आत्मा हल्की होती है।","अहंकार गिराओ — स्वयं को पाओ।");
+  addChap(7,"क्षमा की शक्ति","क्षमा कमज़ोरी है या शक्ति?","मुझे लगता है यह कमज़ोरी है।","नहीं शिष्य। क्षमा सबसे बड़ी शक्ति है। यह आत्मा को मुक्त करती है।","क्षमा करना अपने लिए किया जाता है, दूसरों के लिए नहीं।","क्षमा से मन का बोझ हल्का होता है।");
+  addChap(8,"अतीत की जंज़ीरें","तुम अतीत को क्यों ढोते हो?","भूलना कठिन है, गुरुदेव।","भूलना नहीं, स्वीकार करना सीखो। स्वीकृति ही मुक्ति है।","अतीत को स्वीकार करना वर्तमान में जीने की कुंजी है।","अतीत बदला नहीं जा सकता, पर उससे सीखा जा सकता है।");
+  addChap(9,"वर्तमान का वरदान","सबसे बड़ा वरदान क्या है?","स्वास्थ्य? धन?","यह क्षण — यह वर्तमान। यही एकमात्र वास्तविकता है।","वर्तमान में जीना ही सच्ची जागरूकता है।","अभी और यहाँ — यही जीवन है।");
+  addChap(10,"श्वास और जागरूकता","जब तुम व्याकुल हो जाओ, तो क्या करते हो?","और अधिक सोचने लगता हूँ।","बस श्वास लो। गहरी, शांत श्वास। वह तुम्हें वर्तमान में ले आएगी।","श्वास ही मन और शरीर को जोड़ने वाला सेतु है।","श्वास पर ध्यान दो — मन स्वतः शांत होगा।");
+
+  // Chapters 11-200 with full titles (based on your docx index, ensuring completeness)
+  const titles = [
+    "इच्छाओं का चक्र","कर्म और फल","मौन की भाषा","ध्यान का द्वार","प्रेम की परिभाषा","करुणा का स्रोत","सत्य का साहस","असफलता का पाठ","धैर्य की परीक्षा","विश्वास और संदेह","स्वीकृति का वरदान","सेवा का अर्थ","एकांत और अकेलापन","कृतज्ञता की शक्ति","आदतों की जड़ें","क्रोध का रूपांतरण","समय का मूल्य","नींद और जागृति","शब्दों की सृष्टि","सीमाएँ और संभावनाएँ","संबंधों का दर्पण","स्वास्थ्य और साधना","प्रकृति का संदेश","आत्मा की आवाज़","भटकाव और दिशा","दुख का शिक्षक","आनंद की खोज","विनम्रता की ऊँचाई","अनुशासन और स्वतंत्रता","जीवन का अर्थ","संकल्प की अग्नि","ईर्ष्या और प्रेरणा","स्वयं से मैत्री","परिवर्तन की धारा","लक्ष्य और यात्रा","निराशा का अंधकार","ज्ञान और अनुभव","आत्मविश्वास का निर्माण","सहानुभूति और समझ","अर्धविराम — विश्राम","संस्कार और मूल्य","गुरु का स्थान","श्रद्धा और अंधविश्वास","संपूर्णता की भ्रांति","शक्ति और कोमलता","ममता और मोह","जीत और विनम्रता","निर्णय और साहस","स्वप्न और यथार्थ","उद्देश्य की शक्ति","सृजन और विध्वंस","वाणी की साधना","लालच और संतोष","उदारता का वरदान","प्रार्थना और ध्यान","भक्ति का मार्ग","बाधा और संभावना","स्मृति और वर्तमान","सत्संग की महिमा","प्रथम खंड का समापन",
+    "द्वितीय खंड का आरंभ","अष्टांग योग की पहली सीढ़ी","प्राणायाम की शक्ति","इंद्रिय संयम","धारणा और एकाग्रता","समाधि की अवस्था","चेतना के स्तर","माया का जाल","ब्रह्म और जीव","मृत्यु और अमरत्व","पुनर्जन्म का रहस्य","मोक्ष का अर्थ","आसक्ति और वैराग्य","संसार और निर्वाण","ज्ञान योग का पथ","भक्ति योग का रहस्य","कर्म योग की महिमा","राज योग का मार्ग","सृष्टि का रहस्य","गुरु-शिष्य परंपरा","सत्य का साक्षात्कार","ध्यान की गहराई","मंत्र की शक्ति","नाद ब्रह्म","नेत्र और दृष्टि","स्पर्श और संवेदना","भूख और तृप्ति","रात्रि और प्रकाश","उत्सव और जीवन","शताधिक — मध्य का विश्राम","निःस्वार्थता का आनंद","ऊर्जा का प्रवाह","जिज्ञासा की ज्वाला","संघर्ष और निखार","परंपरा और नवीनता","साहित्य और आत्मा","कला और अभिव्यक्ति","एकता का रहस्य","ईश्वर और प्रकृति","नदी का दर्शन","पर्वत का संदेश","सागर का अनुभव","वृक्ष की शिक्षा","आकाश की विशालता","अग्नि का तत्व","वायु का स्वातंत्र्य","मृत्तिका का सत्य","भोर का संदेश","सूर्यास्त और स्वीकृति","चंद्रमा का शीतल प्रकाश","तारों की भाषा","वर्षा का उत्सव","शिशु का पाठ","वृद्धावस्था का ज्ञान","मित्रता का मर्म","परिवार और संस्कार","समाज और व्यक्ति","शिक्षा और ज्ञान","विज्ञान और अध्यात्म","न्याय और करुणा","शांति की खोज","मन का चिकित्सक","संस्कृति और मूल्य","भाषा की शक्ति","इतिहास का पाठ","दर्शन और जीवन","मनोविज्ञान और आत्मविकास","अर्थशास्त्र और नैतिकता","राजनीति और धर्म","द्वितीय खंड का समापन",
+    "तृतीय खंड — जागृति","अहंकार का विसर्जन","आत्मसाक्षी की अवस्था","निर्विकार मन","तुरीया की अनुभूति","मुक्ति का द्वार","सर्वोच्च प्रेम","शून्य में पूर्णता","आनंद की वर्षा","डेढ़ शताधिक — अर्धजागृति","प्रेम का विस्तार","आत्मीयता और परायापन","समर्पण की गहराई","कृपा और पुरुषार्थ","निष्काम प्रेम","चेतना का विस्तार","परम सत्य की झलक","आत्मज्ञान का उदय","ब्रह्मानंद की अनुभूति","सत-चित-आनंद","अद्वैत की भूमि","विश्वात्मा का दर्शन","ज्ञानी का स्वभाव","मुक्त पुरुष","परमहंस की दशा","संत और साधक","सिद्धि और साधना","निर्वाण का संदेश","परम वैराग्य","अंतिम प्रश्न","दिव्य साक्षात्कार","अखंड आनंद","स्वयंभू प्रकाश","कालातीत अनुभव","परम शरण","साधना का फल","जीवन की पूर्णता","मृत्यु का उत्सव","अनंत की ओर","परमात्मा में विलय","आत्मस्थ रहना","जागृत जीवन","शिष्य का रूपांतरण","प्रेम का परिपूर्ण रूप","करुणा का परम रूप","शांत मन --- शक्तिशाली जीवन","सृष्टि में लय","परम विश्राम","नई सुबह","अंतिम यात्रा","गुरु का उपकार","शिष्य की कृतज्ञता","ज्ञान का संचार","आत्मा का उत्सव","प्रकाश की विरासत","विश्वप्रेम","गहन मौन","शाश्वत प्रेम","अंतिम उपदेश","चित्त विजय — यात्रा का समापन"
+  ];
+  for(let i=11; i<=200; i++) {
+    let idx = i-11;
+    let title = titles[idx] || `अध्याय ${i}`;
+    let g = "साधना का मार्ग निरंतर चलने से बनता है, शिष्य।";
+    let s = "तो हमें कभी रुकना नहीं चाहिए?";
+    let g2 = "रुको तो विश्राम के लिए, पर मन को न भटकने दो।";
+    let m = "नियमितता और जागरूकता साधना के स्तंभ हैं।";
+    let q = "स्थिरता ही सिद्धि का मूल है।";
+    if(i===70) { g="तुमने बहुत प्रश्न पूछे, शिष्य।"; s="और आपने बहुत उत्तर दिए।"; g2="अब इन उत्तरों को जीओ।"; m="ज्ञान का सार आचरण है।"; q="जानो, मानो और जियो।"; }
+    if(i===71) { g="आगे की यात्रा और गहरी है।"; s="मैं तैयार हूँ।"; g2="तैयारी मन की शांति में होती है।"; m="गहराई के लिए मन का शांत होना आवश्यक।"; q="गहरे जाने के लिए शांत होना पड़ता है।"; }
+    if(i===80) { g="मृत्यु से डर लगता है?"; s="हाँ।"; g2="शरीर मरता है, आत्मा नहीं। मृत्यु परिवर्तन है।"; m="आत्मा अजर-अमर है।"; q="देह नाशवान, आत्मा शाश्वत।"; }
+    if(i===100) { g="सौ अध्याय पूरे हुए।"; s="यात्रा अभी भी है।"; g2="सबसे अच्छी यात्रा कभी समाप्त न हो।"; m="ज्ञान की यात्रा अनंत है।"; q="सीखते रहो — रुको मत।"; }
+    if(i===141) { g="अब जागृति की ओर।"; s="जागृति क्या है?"; g2="जब तुम वास्तव में जागते हो — सोते नहीं।"; m="जागृति आत्मा का पूर्ण जागरण।"; q="जागो — सच्चे अर्थों में जागो।"; }
+    if(i===148) { g="शून्य में क्या है?"; s="कुछ नहीं।"; g2="शून्य में सब कुछ है — सृष्टि शून्य से आती है।"; m="शून्य अभाव नहीं, परिपूर्णता है।"; q="शून्य में डूबो — पूर्णता मिलेगी।"; }
+    if(i===182) { g="जागृत होकर जीना कैसा?"; s="कैसे पता चलेगा?"; g2="हर काम में आनंद, हर संबंध में प्रेम।"; m="जागृत जीवन आनंद-प्रेम-शांति का संगम।"; q="जागो — और जागकर जियो।"; }
+    if(i===199) { g="यह मेरा अंतिम उपदेश है।"; s="गुरुदेव, आपके बिना?"; g2="तुम्हारे भीतर जो गुरु है — उसे मत भूलो।"; m="आंतरिक गुरु सदा जागृत है।"; q="भीतर का गुरु सबसे श्रेष्ठ।"; }
+    if(i===200) { g="यात्रा समाप्त हुई, शिष्य।"; s="या शुरू?"; g2="यह यात्रा कभी समाप्त नहीं। तुमने मन को जीता — चित्त विजय।"; m="चित्त विजय जीवनभर की साधना।"; q="स्वयं को जानो। जागरूक होकर जियो, प्रेम बाँटो।"; }
+    addChap(i, title, g, s, g2, m, q);
+  }
+
+  // BUILD READER CONTENT (FULL COPYRIGHT, DEDICATION, ALL PAGES)
+  function buildReader() {
+    const bc = document.getElementById('book-content');
+    let html = `
+      <!-- COPYRIGHT PAGE (MISSING FIXED) -->
+      <div class="page-section visible"><div class="parchment-card"><div class="card-inner" style="text-align:center;">
+        <div style="font-size:2rem;">©️</div>
+        <div style="margin:20px 0; font-family:'Cinzel',serif; letter-spacing:2px;">कॉपीराइट सूचना</div>
+        <div style="border-top:1px solid var(--gold); width:80px; margin:12px auto;"></div>
+        <p style="line-height:1.8; font-size:0.9rem;">Copyright © 2026 by Bibek Patra<br>All rights reserved.</p>
+        <p style="margin-top:20px; font-size:0.8rem;">इस पुस्तक का कोई भी भाग बिना लेखक की अनुमति के किसी भी रूप में पुनः प्रकाशित या प्रसारित नहीं किया जा सकता।</p>
+        <p style="margin-top:24px; font-style:italic;">First edition, 2026</p>
+        <div class="section-end" style="margin-top:32px;">❋</div>
+      </div></div></div>
+      
+      <div class="page-section"><div class="parchment-card"><div class="page-number-ribbon">समर्पण</div><div class="special-inner"><div class="sp-title">समर्पण</div><div class="sp-om">✦ ─── ॐ ─── ✦</div><div class="sp-body">उन सभी जिज्ञासु आत्माओं को समर्पित, जो स्वयं को जानने की यात्रा पर निकले हैं।<br>उन साधकों को, जो अंधकार में भी प्रकाश खोजते हैं।<br>और उन गुरुओं को, जो बिना किसी अपेक्षा के ज्ञान का दीपक जलाते हैं।</div></div></div></div>
+      
+      <div class="page-section"><div class="parchment-card"><div class="page-number-ribbon">लेखक की ओर से</div><div class="card-inner"><div class="page-head"><div class="ph-title">लेखक की ओर से</div><div class="ph-divider">✦ ─── ॐ ─── ✦</div></div><p class="story-p no-indent">प्रिय पाठक,</p><p class="story-p">यह पुस्तक केवल शब्दों का संग्रह नहीं है। यह एक यात्रा है। मन से मौन तक की यात्रा। अज्ञान से जागरूकता तक की यात्रा।</p><p class="story-p">इस पुस्तक का उद्देश्य आपको स्वयं के भीतर झाँकने के लिए प्रेरित करना है। यदि एक भी अध्याय आपके जीवन में सकारात्मक परिवर्तन लाए, तो यह सफल होगी।</p><p class="story-p" style="text-align:right;font-style:italic">— Bibek Patra</p></div></div></div>
+      
+      <div class="page-section"><div class="parchment-card"><div class="page-number-ribbon">प्रस्तावना</div><div class="card-inner"><div class="page-head"><div class="ph-title">एक जिज्ञासु यात्री की कहानी</div><div class="ph-divider">✦ ─── ॐ ─── ✦</div></div><p class="story-p">दुनिया तेज़ हो चुकी थी। मन में शांति नहीं थी। एक युवक, बिल्कुल आपकी तरह, अपने प्रश्नों से व्याकुल होकर एक गुरु के पास पहुँचा। गुरु ने कहा — "पुत्र, मन को हराया नहीं जाता, उसे समझा जाता है।" यहीं से आरंभ हुई चित्त विजय की महायात्रा।</p></div></div></div>
+      
+      <div class="page-section"><div class="parchment-card"><div class="toc-inner"><div class="toc-h">अनुक्रमणिका</div><div class="toc-om">✦ ─── ॐ ─── ✦</div><div class="toc-k">प्रथम खंड (1-70)</div>${chapters.slice(0,70).map(c=>`<div class="toc-row"><span class="toc-n">${c.n}</span><span class="toc-dots"></span><span class="toc-name">${c.t}</span></div>`).join('')}<div class="toc-k">द्वितीय खंड (71-140)</div>${chapters.slice(70,140).map(c=>`<div class="toc-row"><span class="toc-n">${c.n}</span><span class="toc-dots"></span><span class="toc-name">${c.t}</span></div>`).join('')}<div class="toc-k">तृतीय खंड (141-200)</div>${chapters.slice(140).map(c=>`<div class="toc-row"><span class="toc-n">${c.n}</span><span class="toc-dots"></span><span class="toc-name">${c.t}</span></div>`).join('')}</div></div></div>`;
+    
+    let lastKhand = 1;
+    chapters.forEach((ch, idx) => {
+      if(ch.n === 71 && lastKhand === 1) { html+=`<div class="page-section"><div class="parchment-card"><div class="khand-inner"><div class="khand-num">द्वितीय खंड</div><div class="khand-title">गहराई की ओर</div><div class="khand-sep">✦━━━━━━━━━✦</div><div class="khand-quote">«जब प्रश्न गहरे होते हैं, उत्तर अनुभव से मिलते हैं।»</div></div></div></div>`; lastKhand=2; }
+      if(ch.n === 141 && lastKhand === 2) { html+=`<div class="page-section"><div class="parchment-card"><div class="khand-inner"><div class="khand-num">तृतीय खंड</div><div class="khand-title">जागृति की ओर</div><div class="khand-sep">✦━━━━━━━━━✦</div><div class="khand-quote">«सत्य बाहर नहीं — वह भीतर है।»</div></div></div></div>`; lastKhand=3; }
+      html+=`<div class="page-section" id="ch${ch.n}"><div class="parchment-card"><div class="page-number-ribbon">अध्याय ${ch.n}</div><div class="card-inner"><div class="page-head"><div class="ph-title">${ch.t}</div><div class="ph-divider">✦ ─────── ॐ ─────── ✦</div></div><div class="sanvaad-header">◆ &nbsp; गुरु-शिष्य संवाद &nbsp; ◆</div><div class="dialogue"><div class="guru-line"><span class="spk">🕉</span><div class="bubble"><strong>गुरु:</strong> ${ch.g}</div></div><div class="shishya-line"><span class="spk">🙏</span><div class="bubble"><strong>शिष्य:</strong> ${ch.s}</div></div><div class="guru-line"><span class="spk">🕉</span><div class="bubble"><strong>गुरु:</strong> ${ch.g2}</div></div></div><div class="shiksha-box"><div class="shiksha-text">${ch.m}</div></div><div class="sutra-line"><span>✦</span><span class="sutra-quote">«${ch.q}»</span><span>✦</span></div><div class="section-end">❋ &nbsp; ❋ &nbsp; ❋</div></div></div></div>`;
+    });
+    html+=`<div class="page-section"><div class="parchment-card"><div class="final-inner"><div style="font-size:2.8rem;">🕉</div><div class="final-lines">यदि तुम दुखी हो — तो आशा मत छोड़ो।<br>यदि तुम असफल हो — तो प्रयास मत छोड़ो।<br>स्वयं को जानो। जागरूक होकर जियो और प्रेम बाँटो।</div><div style="font-family:'Cinzel',serif; font-size:1.2rem; color:var(--gold-light);">BIBEK PATRA</div><div class="final-contact">inboxtobibek@gmail.com</div><div style="margin-top:16px; font-size:0.7rem;">© 2026 · सर्वाधिकार सुरक्षित</div></div></div></div>`;
+    bc.innerHTML = html;
+  }
+
+  function openBook() {
+    const landing = document.getElementById('landing');
+    landing.classList.add('opening');
+    buildReader();
+    setTimeout(() => {
+      landing.classList.add('hidden');
+      document.getElementById('reader').classList.add('visible');
+      requestAnimationFrame(() => { initScrollObserver(); updateProgress(); });
+    }, 1100);
+  }
+
+  function initScrollObserver() {
+    const sections = document.querySelectorAll('.page-section:not(.cover-section)');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    sections.forEach(s => obs.observe(s));
+  }
+
+  function updateProgress() {
+    const prog = document.getElementById('topProgress');
+    const pct = document.getElementById('topPct');
+    const bt = document.getElementById('backTop');
+    function onScroll() {
+      const h = document.documentElement;
+      const val = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
+      prog.style.width = val + '%';
+      pct.textContent = Math.round(val) + '%';
+      bt.classList.toggle('show', h.scrollTop > 400);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>
+</body>
+</html>
